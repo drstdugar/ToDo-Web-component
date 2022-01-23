@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(
+    rgba(83, 236, 198, 0.5),
+    rgba(111, 241, 209, 0.5),
+    rgba(142, 231, 208, 0.5)
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
