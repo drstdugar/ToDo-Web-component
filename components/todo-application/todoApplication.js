@@ -11,19 +11,23 @@ class ToDoApplication extends HTMLElement {
 
     this.tasks = [{id: 1, task: 'Go Shopping', done: false}];
 
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    this.shadowRoot.appendChild(new ToDoInput());
-
-    this.todoList = new ToDoList();
-    this.shadowRoot.appendChild(this.todoList);
-
-    this.todoList.renderList(this.tasks);
-
     this.addTask = this.shadowRoot
       .querySelector('todo-input')
       .shadowRoot.querySelector('#add-task');
+
+    this.taskInput = this.shadowRoot
+      .querySelector('todo-input')
+      .shadowRoot.querySelector('#enter-task');
+
+    this.todoList = new ToDoList();
+
+    this.attachShadow({mode: 'open'});
+
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.appendChild(new ToDoInput());
+    this.shadowRoot.appendChild(this.todoList);
+
+    this.todoList.renderList(this.tasks);
 
     this.actions();
   }
@@ -32,20 +36,19 @@ class ToDoApplication extends HTMLElement {
     this.addTask.addEventListener('click', () => this.submitTask());
     this.todoList.addEventListener('done', e => this.doneTask(e.detail.id));
     this.todoList.addEventListener('delete', e => this.deleteTask(e.detail.id));
+    this.taskInput.addEventListener('keypress', e => {
+      if (e.code === 'Enter') this.submitTask();
+    });
   }
 
   submitTask() {
     let id = this.tasks.length ? this.tasks[0].id + 1 : 1;
 
-    let text = this.shadowRoot
-      .querySelector('todo-input')
-      .shadowRoot.querySelector('#enter-task');
-
-    const task = {id: id, task: text.value, done: false};
+    const task = {id: id, task: this.taskInput.value, done: false};
 
     this.tasks = [task, ...this.tasks];
 
-    text.value = '';
+    this.taskInput.value = '';
 
     this.todoList.renderList(this.tasks);
   }
