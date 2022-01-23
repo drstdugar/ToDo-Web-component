@@ -4,7 +4,7 @@ export const tmpl = `
         width: 50%;
         margin: 0 auto;
         background: aliceblue;
-        border-radius: 5px 5px 0 0;
+        border-radius: 5px;
     }
 
     h3 {

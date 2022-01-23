@@ -21,7 +21,6 @@ export class ToDoList extends HTMLElement {
         .querySelector('.task-list')
         .appendChild(new ToDoTask());
       task.shadowRoot.querySelector('#task').textContent = element.task;
-      task.setAttribute('id', element.id);
 
       this.taskDoneCheck(task, element.done);
 
