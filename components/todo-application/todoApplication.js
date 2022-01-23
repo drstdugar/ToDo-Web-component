@@ -11,14 +11,6 @@ class ToDoApplication extends HTMLElement {
 
     this.tasks = [{id: 1, task: 'Go Shopping', done: false}];
 
-    this.addTask = this.shadowRoot
-      .querySelector('todo-input')
-      .shadowRoot.querySelector('#add-task');
-
-    this.taskInput = this.shadowRoot
-      .querySelector('todo-input')
-      .shadowRoot.querySelector('#enter-task');
-
     this.todoList = new ToDoList();
 
     this.attachShadow({mode: 'open'});
@@ -26,6 +18,14 @@ class ToDoApplication extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.shadowRoot.appendChild(new ToDoInput());
     this.shadowRoot.appendChild(this.todoList);
+
+    this.addTask = this.shadowRoot
+      .querySelector('todo-input')
+      .shadowRoot.querySelector('#add-task');
+
+    this.taskInput = this.shadowRoot
+      .querySelector('todo-input')
+      .shadowRoot.querySelector('#enter-task');
 
     this.todoList.renderList(this.tasks);
 
